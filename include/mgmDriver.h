@@ -5,7 +5,7 @@
 #ifndef ROBOTERARM_MGMDRIVER_H
 #define ROBOTERARM_MGMDRIVER_H
 
-#include "MetalGearMotor.h"
+#include "mgmDriver.h"
 
 #define STOP       0
 #define SLOW_LEFT  1

@@ -86,19 +86,19 @@ void FSMRoboticArm::evalState() {                                        // stat
             roboticArm.mgmDriver1.setSpeed(1, STOP);
             roboticArm.mgmDriver1.setSpeed(2, STOP);
             roboticArm.mgmDriver2.setSpeed(1, STOP);
-            roboticArm.mgmDriver2.setSpeed(2, SLOW_RIGHT);
+            roboticArm.mgmDriver2.setSpeed(2, STOP);
             roboticArm.servoMotor.moveServo(CLOSE);
             break;
         case RoboticArmState::OPENGRIPPER:                                // 12
             roboticArm.mgmDriver1.setSpeed(1, STOP);
             roboticArm.mgmDriver1.setSpeed(2, STOP);
             roboticArm.mgmDriver2.setSpeed(1, STOP);
-            roboticArm.mgmDriver2.setSpeed(2, SLOW_RIGHT);
+            roboticArm.mgmDriver2.setSpeed(2, STOP);
             roboticArm.servoMotor.moveServo(OPEN);
             break;
         default:
 #ifdef DEBUG
-        Serial.print("WARNING! You should never see this!\n");
+        Serial.print("WARNING! Error in State Evaluation!\n");
 #endif
     }
 
@@ -149,5 +149,66 @@ void FSMRoboticArm::evalTransition() {
             nextState = RoboticArmState::MIDDLEARMUP;
         }
         break;
+
+        case RoboticArmState::OPENGRIPPER:                               // 3
+        if(!roboticArm.gripperButton1.isPressed()) {
+            nextState = RoboticArmState::BETRIEBSBEREIT;
+        } break;
+
+        case RoboticArmState::CLOSEGRIPPER:                              // 4
+        if(!roboticArm.gripperButton2.isPressed()) {
+            nextState = RoboticArmState::BETRIEBSBEREIT;
+        } break;
+
+        case RoboticArmState::RIGHTTURN:                                 // 5
+        if(roboticArm.joyStick1.getXVal() < 10) {
+            nextState = RoboticArmState::BETRIEBSBEREIT;
+        } break;
+
+        case RoboticArmState::LEFTTURN:                                  // 6
+        if(roboticArm.joyStick1.getXVal() > -10) {
+            nextState = RoboticArmState::BETRIEBSBEREIT;
+        } break;
+
+        case RoboticArmState::FRONTARMUP:                                // 7
+        if(roboticArm.joyStick2.getXVal() < 10) {
+            nextState = RoboticArmState::BETRIEBSBEREIT;
+        } break;
+
+        case RoboticArmState::FRONTARMDOWN:                              // 8
+        if(roboticArm.joyStick2.getXVal() > -10) {
+            nextState = RoboticArmState::BETRIEBSBEREIT;
+        } break;
+
+        case RoboticArmState::REARARMDOWN:                               // 9
+        if(roboticArm.joyStick1.getYVal() < 10) {
+            nextState = RoboticArmState::BETRIEBSBEREIT;
+        } break;
+
+        case RoboticArmState::REARARMUP:                                 // 10
+        if(roboticArm.joyStick1.getYVal() > -10) {
+            nextState = RoboticArmState::BETRIEBSBEREIT;
+        } break;
+
+        case RoboticArmState::MIDDLEARMDOWN:                             // 11
+        if(roboticArm.joyStick2.getYVal() < 10) {
+            nextState = RoboticArmState::BETRIEBSBEREIT;
+        } break;
+
+        case RoboticArmState::MIDDLEARMUP:                               // 12
+        if(roboticArm.joyStick2.getYVal() > -10) {
+            nextState = RoboticArmState::BETRIEBSBEREIT;
+        } break;
+
+        default:
+#ifdef DEBUG
+            Serial.print("WARNING! Error in Transition Evaluation!\n");
+#endif
+    }
+    if(currentState != nextState) {
+
+        switch (currentState) {                                          // Exits
+            case
+        }
     }
 }
