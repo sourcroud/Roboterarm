@@ -1,6 +1,8 @@
 #include <Arduino.h>
 #include "RoboticArm.h"
 #include "FSMRoboticArm.h"
+#include "ServoWrapper.h"
+
 // initialize digital pins
 #include "Pinbelegung.h"
 
@@ -33,9 +35,15 @@ void setup() {
     pinMode(microSwitch4Pin, INPUT);
 
     pinMode(servoMotorPin, OUTPUT);
+
+
 }
 
-void loop() {
-    RoboticArm robot1;
+RoboticArm robot;
+ServoWrapper gripper(robot);
+FSMRoboticArm fsm(robot, gripper);
 
+void loop() {
+    fsm.evalTransition();
+    fsm.evalState();
 }

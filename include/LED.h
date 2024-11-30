@@ -11,7 +11,6 @@ private:
     void setState(bool state) const;
     bool ledState = false;
     unsigned long preMillis;
-    unsigned long interval;
 public:
     explicit LED(int initialPin);
     void switchOn();

@@ -5,8 +5,8 @@
 #ifndef ROBOTERARM_PINBELEGUNG_H
 #define ROBOTERARM_PINBELEGUNG_H
 
-#define gripperButton1Pin 38
-#define gripperButton2Pin 39
+// #define gripperButton1Pin 38
+// #define gripperButton2Pin 39
 
 #define joyStick1XPin A0
 #define joyStick1YPin A1

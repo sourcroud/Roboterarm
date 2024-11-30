@@ -21,7 +21,7 @@ int JoyStick::getYVal() {
     return yVal;
 }
 
-bool JoyStick::getState() {
+bool JoyStick::isPressed() {
     int selVal = digitalRead(selPin);
     if(selVal == HIGH)return true;
     else return false;

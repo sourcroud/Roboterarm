@@ -6,7 +6,7 @@
 #include "Pinbelegung.h"
 
 RoboticArm::RoboticArm()
-: gripperButton1(gripperButton1Pin), gripperButton2(gripperButton2Pin),
+: // gripperButton1(gripperButton1Pin), gripperButton2(gripperButton2Pin),
   joyStick1(joyStick1XPin, joyStick1YPin, joyStick1SelPin),
   joyStick2(joyStick2XPin, joyStick2YPin, joyStick2SelPin),
   ledGreen(ledGreenPin),
@@ -18,9 +18,28 @@ RoboticArm::RoboticArm()
   microSwitch2(microSwitch2Pin),
   microSwitch3(microSwitch3Pin),
   microSwitch4(microSwitch4Pin),
-  servoMotor(servoMotorPin),
-  touchSensor(touchSensorPin)
+  touchSensor(touchSensorPin),
+  servo()
 {
+    servo.attach(servoMotorPin);
+}
+
+RoboticArm::RoboticArm(const RoboticArm &other)
+: joyStick1(other.joyStick1),
+  joyStick2(other.joyStick2),
+  ledGreen(other.ledGreen),
+  ledYellow(other.ledYellow),
+  ledRed(other.ledRed),
+  mgmDriver1(other.mgmDriver1),
+  mgmDriver2(other.mgmDriver2),
+  microSwitch1(other.microSwitch1),
+  microSwitch2(other.microSwitch2),
+  microSwitch3(other.microSwitch3),
+  microSwitch4(other.microSwitch4),
+  touchSensor(other.touchSensor),
+  servo(other.servo)
+{
+
 }
 
 void RoboticArm::updateSensors() {
@@ -30,3 +49,5 @@ void RoboticArm::updateSensors() {
 void RoboticArm::updateActuators() {
 
 }
+
+

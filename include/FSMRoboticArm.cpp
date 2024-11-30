@@ -4,17 +4,13 @@
 
 #include "FSMRoboticArm.h"
 #include "RoboticArm.h"
-#include "JoyStick.h"
-#include "LED.h"
-//#include "mgmDriver.h"
-#include "MicroSwitch.h"
-#include "ServoMotor.h"
-#include "TouchSensor.h"
+#include "ServoWrapper.h"
+
 
 #define DEBUG
 
-FSMRoboticArm::FSMRoboticArm(RoboticArm& roboticArm)
-:roboticArm(roboticArm)
+FSMRoboticArm::FSMRoboticArm(RoboticArm& roboticArm, ServoWrapper& gripper)
+:roboticArm(roboticArm), gripper(gripper)
 {
 currentState = RoboticArmState::INITIALZUSTAND;
 }
@@ -83,20 +79,21 @@ void FSMRoboticArm::evalState() {                                        // stat
             roboticArm.mgmDriver2.setSpeed(2, SLOW_RIGHT);
             break;
         case RoboticArmState::CLOSEGRIPPER:                                // 11
+            gripper.closeGripper();
             roboticArm.mgmDriver1.setSpeed(1, STOP);
             roboticArm.mgmDriver1.setSpeed(2, STOP);
             roboticArm.mgmDriver2.setSpeed(1, STOP);
             roboticArm.mgmDriver2.setSpeed(2, STOP);
-            roboticArm.servoMotor.moveServo(CLOSE);
             break;
         case RoboticArmState::OPENGRIPPER:                                // 12
+            gripper.openGripper();
             roboticArm.mgmDriver1.setSpeed(1, STOP);
             roboticArm.mgmDriver1.setSpeed(2, STOP);
             roboticArm.mgmDriver2.setSpeed(1, STOP);
             roboticArm.mgmDriver2.setSpeed(2, STOP);
-            roboticArm.servoMotor.moveServo(OPEN);
             break;
         default:
+            roboticArm.ledRed.flashLED();
 #ifdef DEBUG
         Serial.print("WARNING! Error in State Evaluation!\n");
 #endif
@@ -118,10 +115,10 @@ void FSMRoboticArm::evalTransition() {
         if(roboticArm.touchSensor.isTouched()) {
             nextState = RoboticArmState::INITIALZUSTAND;
         }
-        else if(roboticArm.gripperButton1.isPressed()) {
+        else if(roboticArm.joyStick1.isPressed()) {
             nextState = RoboticArmState::OPENGRIPPER;
         }
-        else if(roboticArm.gripperButton2.isPressed()) {
+        else if(roboticArm.joyStick2.isPressed()) {
             nextState = RoboticArmState::CLOSEGRIPPER;
         }
         else if(roboticArm.joyStick1.getXVal() >= 10) {    // right
@@ -136,71 +133,71 @@ void FSMRoboticArm::evalTransition() {
         else if(roboticArm.joyStick2.getXVal() <= -10) {   // left
             nextState = RoboticArmState::FRONTARMDOWN;
         }
-        else if(roboticArm.joyStick1.getYVal() >= 10) {
+        else if(roboticArm.joyStick1.getYVal() >= 10) {    // down
             nextState = RoboticArmState::REARARMDOWN;
         }
-        else if(roboticArm.joyStick1.getYVal() <= -10) {
+        else if(roboticArm.joyStick1.getYVal() <= -10) {   // up
             nextState = RoboticArmState::REARARMUP;
         }
-        else if(roboticArm.joyStick2.getYVal() >= 10) {
+        else if(roboticArm.joyStick2.getYVal() >= 10) {    // down
             nextState = RoboticArmState::MIDDLEARMDOWN;
         }
-        else if(roboticArm.joyStick2.getYVal() <= -10) {
+        else if(roboticArm.joyStick2.getYVal() <= -10) {   // up
             nextState = RoboticArmState::MIDDLEARMUP;
-        }
-        break;
-
-        case RoboticArmState::OPENGRIPPER:                               // 3
-        if(!roboticArm.gripperButton1.isPressed()) {
-            nextState = RoboticArmState::BETRIEBSBEREIT;
         } break;
 
-        case RoboticArmState::CLOSEGRIPPER:                              // 4
-        if(!roboticArm.gripperButton2.isPressed()) {
-            nextState = RoboticArmState::BETRIEBSBEREIT;
-        } break;
+        case RoboticArmState::LEFTTURN:                                  // 3
+            if(roboticArm.joyStick1.getXVal() > -10) {
+                nextState = RoboticArmState::BETRIEBSBEREIT;
+            } break;
 
-        case RoboticArmState::RIGHTTURN:                                 // 5
-        if(roboticArm.joyStick1.getXVal() < 10) {
-            nextState = RoboticArmState::BETRIEBSBEREIT;
-        } break;
+        case RoboticArmState::RIGHTTURN:                                 // 4
+            if(roboticArm.joyStick1.getXVal() < 10) {
+                nextState = RoboticArmState::BETRIEBSBEREIT;
+            } break;
 
-        case RoboticArmState::LEFTTURN:                                  // 6
-        if(roboticArm.joyStick1.getXVal() > -10) {
-            nextState = RoboticArmState::BETRIEBSBEREIT;
-        } break;
+        case RoboticArmState::REARARMUP:                                 // 5
+            if(roboticArm.joyStick1.getYVal() > -10) {
+                nextState = RoboticArmState::BETRIEBSBEREIT;
+            } break;
 
-        case RoboticArmState::FRONTARMUP:                                // 7
-        if(roboticArm.joyStick2.getXVal() < 10) {
-            nextState = RoboticArmState::BETRIEBSBEREIT;
-        } break;
+        case RoboticArmState::REARARMDOWN:                               // 6
+            if(roboticArm.joyStick1.getYVal() < 10) {
+                nextState = RoboticArmState::BETRIEBSBEREIT;
+            } break;
 
-        case RoboticArmState::FRONTARMDOWN:                              // 8
-        if(roboticArm.joyStick2.getXVal() > -10) {
-            nextState = RoboticArmState::BETRIEBSBEREIT;
-        } break;
+        case RoboticArmState::MIDDLEARMUP:                               // 7
+            if(roboticArm.joyStick2.getYVal() > -10) {
+                nextState = RoboticArmState::BETRIEBSBEREIT;
+            } break;
 
-        case RoboticArmState::REARARMDOWN:                               // 9
-        if(roboticArm.joyStick1.getYVal() < 10) {
-            nextState = RoboticArmState::BETRIEBSBEREIT;
-        } break;
+        case RoboticArmState::MIDDLEARMDOWN:                             // 8
+            if(roboticArm.joyStick2.getYVal() < 10) {
+                nextState = RoboticArmState::BETRIEBSBEREIT;
+            } break;
 
-        case RoboticArmState::REARARMUP:                                 // 10
-        if(roboticArm.joyStick1.getYVal() > -10) {
-            nextState = RoboticArmState::BETRIEBSBEREIT;
-        } break;
+        case RoboticArmState::FRONTARMUP:                                // 9
+            if(roboticArm.joyStick2.getXVal() < 10) {
+                nextState = RoboticArmState::BETRIEBSBEREIT;
+            } break;
 
-        case RoboticArmState::MIDDLEARMDOWN:                             // 11
-        if(roboticArm.joyStick2.getYVal() < 10) {
-            nextState = RoboticArmState::BETRIEBSBEREIT;
-        } break;
+        case RoboticArmState::FRONTARMDOWN:                              // 10
+            if(roboticArm.joyStick2.getXVal() > -10) {
+                nextState = RoboticArmState::BETRIEBSBEREIT;
+            } break;
 
-        case RoboticArmState::MIDDLEARMUP:                               // 12
-        if(roboticArm.joyStick2.getYVal() > -10) {
+        case RoboticArmState::CLOSEGRIPPER:                              // 11
+            if(!roboticArm.joyStick2.isPressed()) {
+                nextState = RoboticArmState::BETRIEBSBEREIT;
+            } break;
+
+        case RoboticArmState::OPENGRIPPER:                               // 12
+        if(!roboticArm.joyStick1.isPressed()) {
             nextState = RoboticArmState::BETRIEBSBEREIT;
         } break;
 
         default:
+            roboticArm.ledRed.flashLED();
 #ifdef DEBUG
             Serial.print("WARNING! Error in Transition Evaluation!\n");
 #endif
@@ -208,7 +205,143 @@ void FSMRoboticArm::evalTransition() {
     if(currentState != nextState) {
 
         switch (currentState) {                                          // Exits
-            case
+
+            case RoboticArmState::INITIALZUSTAND:                        // 1
+                roboticArm.ledGreen.switchOff();
+                roboticArm.ledYellow.switchOff();
+                roboticArm.ledRed.switchOff();
+                break;
+
+            case RoboticArmState::BETRIEBSBEREIT:                        // 2
+                roboticArm.ledGreen.switchOff();
+                break;
+
+            case RoboticArmState::LEFTTURN:                              // 3
+                roboticArm.ledGreen.switchOff();
+                roboticArm.ledYellow.switchOff();
+                break;
+
+            case RoboticArmState::RIGHTTURN:                             // 4
+                roboticArm.ledGreen.switchOff();
+                roboticArm.ledYellow.switchOff();
+                break;
+
+            case RoboticArmState::REARARMUP:                             // 5
+                roboticArm.ledGreen.switchOff();
+                roboticArm.ledYellow.switchOff();
+                break;
+
+            case RoboticArmState::REARARMDOWN:                           // 6
+                roboticArm.ledGreen.switchOff();
+                roboticArm.ledYellow.switchOff();
+                break;
+
+            case RoboticArmState::MIDDLEARMUP:                           // 7
+                roboticArm.ledGreen.switchOff();
+                roboticArm.ledYellow.switchOff();
+                break;
+
+            case RoboticArmState::MIDDLEARMDOWN:                         // 8
+                roboticArm.ledGreen.switchOff();
+                roboticArm.ledYellow.switchOff();
+                break;
+
+            case RoboticArmState::FRONTARMUP:                            // 9
+                roboticArm.ledGreen.switchOff();
+                roboticArm.ledYellow.switchOff();
+                break;
+
+            case RoboticArmState::FRONTARMDOWN:                          // 10
+                roboticArm.ledGreen.switchOff();
+                roboticArm.ledYellow.switchOff();
+                break;
+
+            case RoboticArmState::CLOSEGRIPPER:                          // 11
+                roboticArm.ledGreen.switchOff();
+                roboticArm.ledYellow.switchOff();
+                gripper.savePos();
+                break;
+
+            case RoboticArmState::OPENGRIPPER:                           // 12
+                roboticArm.ledGreen.switchOff();
+                roboticArm.ledYellow.switchOff();
+                gripper.savePos();
+                break;
+
+            default:
+                roboticArm.ledRed.flashLED();
+#ifdef DEBUG
+                Serial.print("WARNING! Error in Exit Evaluation!\n");
+#endif
+        }
+
+        switch (nextState) {                                             // Entries
+
+            case RoboticArmState::INITIALZUSTAND:                        // 1
+                roboticArm.ledGreen.flashLED();
+                roboticArm.ledYellow.flashLED();
+                roboticArm.ledRed.flashLED();
+                break;
+
+            case RoboticArmState::BETRIEBSBEREIT:                        // 2
+                roboticArm.ledGreen.switchOn();
+                break;
+
+            case RoboticArmState::LEFTTURN:                              // 3
+                roboticArm.ledGreen.switchOn();
+                roboticArm.ledYellow.switchOn();
+                break;
+
+            case RoboticArmState::RIGHTTURN:                             // 4
+                roboticArm.ledGreen.switchOn();
+                roboticArm.ledYellow.switchOn();
+                break;
+
+            case RoboticArmState::REARARMUP:                             // 5
+                roboticArm.ledGreen.switchOn();
+                roboticArm.ledYellow.switchOn();
+                break;
+
+            case RoboticArmState::REARARMDOWN:                           // 6
+                roboticArm.ledGreen.switchOn();
+                roboticArm.ledYellow.switchOn();
+                break;
+
+            case RoboticArmState::MIDDLEARMUP:                           // 7
+                roboticArm.ledGreen.switchOn();
+                roboticArm.ledYellow.switchOn();
+                break;
+
+            case RoboticArmState::MIDDLEARMDOWN:                         // 8
+                roboticArm.ledGreen.switchOn();
+                roboticArm.ledYellow.switchOn();
+                break;
+
+            case RoboticArmState::FRONTARMUP:                            // 9
+                roboticArm.ledGreen.switchOn();
+                roboticArm.ledYellow.switchOn();
+                break;
+
+            case RoboticArmState::FRONTARMDOWN:                          // 10
+                roboticArm.ledGreen.switchOn();
+                roboticArm.ledYellow.switchOn();
+                break;
+
+            case RoboticArmState::CLOSEGRIPPER:                          // 11
+                roboticArm.ledGreen.switchOn();
+                roboticArm.ledYellow.flashLED();
+                break;
+
+            case RoboticArmState::OPENGRIPPER:                           // 12
+                roboticArm.ledGreen.switchOn();
+                roboticArm.ledYellow.flashLED();
+                break;
+
+            default:
+                roboticArm.ledRed.flashLED();
+#ifdef DEBUG
+                Serial.print("WARNING! Error in Entry Evaluation!\n");
+#endif
         }
     }
 }

@@ -9,9 +9,9 @@
 #include "LED.h"
 #include "mgmDriver.h"
 #include "MicroSwitch.h"
-#include "ServoMotor.h"
 #include "TouchSensor.h"
 #include "GripperButton.h"
+#include "Servo.h"
 
 class RoboticArm {
     friend class GripperButton;
@@ -19,13 +19,14 @@ class RoboticArm {
     friend class LED;
     friend class mgmDriver;
     friend class MicroSwitch;
-    friend class ServoMotor;
+    friend class ServoWrapper;
     friend class TouchSensor;
+    friend class Servo;
 private:
 
 public:
-    GripperButton gripperButton1; // OPEN
-    GripperButton gripperButton2; // CLOSE
+    // GripperButton gripperButton1; // OPEN
+    // GripperButton gripperButton2; // CLOSE
     JoyStick joyStick1;
     JoyStick joyStick2;
     LED ledGreen;
@@ -37,11 +38,12 @@ public:
     MicroSwitch microSwitch2;
     MicroSwitch microSwitch3;
     MicroSwitch microSwitch4;
-    ServoMotor servoMotor;
     TouchSensor touchSensor;
+    Servo servo;
 
 public:
     RoboticArm();
+    RoboticArm(const RoboticArm& other);
     void updateSensors();
     void updateActuators();
 };

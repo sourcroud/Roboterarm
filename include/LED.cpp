@@ -5,11 +5,10 @@
 #include "LED.h"
 #include <Arduino.h>
 
-#define flashInterval 50
+#define flashInterval 500 // ms
 
 LED::LED(int initialPin) : initialPin(initialPin) {
     preMillis = 0;
-    interval = flashInterval;
     ledState = false;
 }
 
@@ -30,7 +29,7 @@ void LED::switchOff() {
 
 void LED::flashLED() {
     unsigned long currentMillis = millis();
-    if(currentMillis - preMillis >= interval) { // Sind flashInterval ms vergangen?
+    if(currentMillis - preMillis >= flashInterval) { // Sind flashInterval ms vergangen?
         preMillis = currentMillis; // Zeitstempel aktualisieren
         ledState = !ledState; // LED-Zustand umschalten, egal welcher Zustand vorliegt
         // Compiler scheint ledState = !ledState; falsch zu interpretieren.

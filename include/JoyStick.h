@@ -16,7 +16,7 @@ public:
     explicit JoyStick(int xPin, int yPin, int selPin);
     int getXVal();
     int getYVal();
-    bool getState();
+    bool isPressed();
 };
 
 
