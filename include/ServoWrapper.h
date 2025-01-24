@@ -17,11 +17,11 @@
 
 class ServoWrapper {
 private:
-    RoboticArm &gripper;
+    RoboticArm& gripper;
     int pos;
     unsigned long preMillis;
 public:
-    ServoWrapper(RoboticArm &gripper);
+    explicit ServoWrapper(RoboticArm& gripper);
     void openGripper();
     void closeGripper();
     void savePos() const;

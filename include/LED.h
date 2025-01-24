@@ -9,7 +9,7 @@ class LED {
 private:
     int initialPin;
     void setState(bool state) const;
-    bool ledState = false;
+    bool ledState;
     unsigned long preMillis;
 public:
     explicit LED(int initialPin);

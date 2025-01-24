@@ -22,8 +22,6 @@ class RoboticArm {
     friend class ServoWrapper;
     friend class TouchSensor;
     friend class Servo;
-private:
-
 public:
     // GripperButton gripperButton1; // OPEN
     // GripperButton gripperButton2; // CLOSE
@@ -43,9 +41,9 @@ public:
 
 public:
     RoboticArm();
-    RoboticArm(const RoboticArm& other);
-    void updateSensors();
-    void updateActuators();
+    //Copy-Konstruktor
+    RoboticArm(const RoboticArm& other) = default;
+    ~RoboticArm();
 };
 
 
