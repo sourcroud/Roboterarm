@@ -1,10 +1,10 @@
 #include <Arduino.h>
-#include "RoboticArm.h"
-#include "FSMRoboticArm.h"
-#include "ServoWrapper.h"
+#include "robo-src/RoboticArm.h"
+#include "robo-src/FSMRoboticArm.h"
+#include "robo-src/ServoWrapper.h"
 
 // initialize digital pins
-#include "Pinbelegung.h"
+#include "robo-src/iomasks.h"
 
 void setup() {
     Serial.begin(9600);
@@ -44,6 +44,7 @@ ServoWrapper gripper(robot);
 FSMRoboticArm fsm(robot, gripper);
 
 void loop() {
+
     fsm.evalTransition();
     fsm.evalState();
 }

@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>528</x>
+      <y>144</y>
+      <w>176</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>
+INITIALZUSTAND
+--
+entry
+/ ledGreen.flashLED()
+/ ledYellow.flashLED()
+/ ledYellow.flashLED()
+--
+do 
+/ mgmDriver1.setSpeed(1, STOP)
+/ mgmDriver1.setSpeed(2, STOP)
+/ mgmDriver2.setSpeed(1, STOP)
+/ mgmDriver2.setSpeed(2, STOP)
+--
+exit 
+/ ledGreen.switchOff()
+/ ledYellow.switchOff()
+/ ledRed.switchOff()
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>608</x>
+      <y>80</y>
+      <w>24</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>608</x>
+      <y>0</y>
+      <w>16</w>
+      <h>16</h>
+    </coordinates>
+    <panel_attributes>type=initial</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>608</x>
+      <y>8</y>
+      <w>24</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>528</x>
+      <y>376</y>
+      <w>176</w>
+      <h>168</h>
+    </coordinates>
+    <panel_attributes>
+BETRIEBSBEREIT
+--
+entry
+/ ledGreen.switchOn()
+--
+do 
+/ mgmDriver1.setSpeed(1, STOP)
+/ mgmDriver1.setSpeed(2, STOP)
+/ mgmDriver2.setSpeed(1, STOP)
+/ mgmDriver2.setSpeed(2, STOP)
+--
+exit 
+/ ledGreen.switchOff()
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>256</y>
+      <w>128</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+ TouchSensor</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;250.0;10.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>488</x>
+      <y>256</y>
+      <w>96</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+ TouchSensor</panel_attributes>
+    <additional_attributes>50.0;250.0;10.0;250.0;10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>40</x>
+      <y>624</y>
+      <w>264</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>
+LEFT TURN
+--
+entry
+/ ledGreen.switchOn()
+/ ledYellow.switchOn()
+--
+do 
+/ mgmDriver1.setSpeed(1, SLOW_LEFT)
+/ mgmDriver1.setSpeed(2, STOP)
+/ mgmDriver2.setSpeed(1, STOP)
+/ mgmDriver2.setSpeed(2, STOP)
+--
+exit 
+/ ledGreen.switchOff()
+/ ledYellow.switchOff()
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>544</x>
+      <y>536</y>
+      <w>120</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+JoyStick1 DOWN
+-&gt; getYVal() &lt;= -10
+
+
+ </panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>672</x>
+      <y>536</y>
+      <w>120</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+ JoyStick2 DOWN
+ -&gt; getYVal() &gt;= 10</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>40</x>
+      <y>816</y>
+      <w>264</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>
+RIGHT TURN
+--
+entry
+/ ledGreen.switchOn()
+/ ledYellow.switchOn()
+--
+do 
+/ mgmDriver1.setSpeed(1, SLOW_RIGHT)
+/ mgmDriver1.setSpeed(2, STOP)
+/ mgmDriver2.setSpeed(1, STOP)
+/ mgmDriver2.setSpeed(2, STOP)
+--
+exit 
+/ ledGreen.switchOff()
+/ ledYellow.switchOff()
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>0</x>
+      <y>480</y>
+      <w>544</w>
+      <h>440</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+     JoyStick1 RIGHT 
+       -&gt; getXVal() &gt;= 10</panel_attributes>
+    <additional_attributes>50.0;530.0;30.0;530.0;30.0;20.0;660.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>160</x>
+      <y>496</y>
+      <w>384</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+JoyStick1 LEFT -&gt; getXVal() &lt;= -10</panel_attributes>
+    <additional_attributes>10.0;160.0;10.0;20.0;460.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>480</y>
+      <w>528</w>
+      <h>432</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+JoyStick2 LEFT
+-&gt; getXVal() &lt;= -10  </panel_attributes>
+    <additional_attributes>620.0;520.0;640.0;510.0;640.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>496</y>
+      <w>376</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+JoyStick2 RIGHT -&gt; getXVal() &gt;= 10</panel_attributes>
+    <additional_attributes>450.0;160.0;450.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>312</x>
+      <y>520</y>
+      <w>232</w>
+      <h>400</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+ JoyStick1 UP
+ -&gt; joyStick1.getYVal() &gt;= 10
+
+
+
+
+ </panel_attributes>
+    <additional_attributes>40.0;480.0;10.0;480.0;10.0;10.0;270.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>520</y>
+      <w>304</w>
+      <h>392</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+ JoyStick2 UP
+
+
+
+
+ </panel_attributes>
+    <additional_attributes>250.0;470.0;270.0;470.0;270.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>344</x>
+      <y>624</y>
+      <w>264</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>
+REAR ARM UP
+--
+entry
+/ ledGreen.switchOn()
+/ ledYellow.switchOn()
+--
+do 
+/ mgmDriver1.setSpeed(1, STOP)
+/ mgmDriver1.setSpeed(2, SLOW_LEFT)
+/ mgmDriver2.setSpeed(1, STOP)
+/ mgmDriver2.setSpeed(2, STOP)
+--
+exit 
+/ ledGreen.switchOff()
+/ ledYellow.switchOff()
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>344</x>
+      <y>816</y>
+      <w>264</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>
+REAR ARM DOWN
+--
+entry
+/ ledGreen.switchOn()
+/ ledYellow.switchOn()
+--
+do 
+/ mgmDriver1.setSpeed(1, STOP)
+/ mgmDriver1.setSpeed(2, SLOW_RIGHT)
+/ mgmDriver2.setSpeed(1, STOP)
+/ mgmDriver2.setSpeed(2, STOP)
+--
+exit 
+/ ledGreen.switchOff()
+/ ledYellow.switchOff()
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>632</x>
+      <y>624</y>
+      <w>264</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>
+MIDDLE ARM UP
+--
+entry
+/ ledGreen.switchOn()
+/ ledYellow.switchOn()
+--
+do 
+/ mgmDriver1.setSpeed(1, STOP)
+/ mgmDriver1.setSpeed(2, STOP)
+/ mgmDriver2.setSpeed(1, SLOW_LEFT)
+/ mgmDriver2.setSpeed(2, STOP)
+--
+exit 
+/ ledGreen.switchOff()
+/ ledYellow.switchOff()
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>632</x>
+      <y>816</y>
+      <w>264</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>
+MIDDLE ARM DOWN
+--
+entry
+/ ledGreen.switchOn()
+/ ledYellow.switchOn()
+--
+do 
+/ mgmDriver1.setSpeed(1, STOP)
+/ mgmDriver1.setSpeed(2, STOP)
+/ mgmDriver2.setSpeed(1, SLOW_RIGHT)
+/ mgmDriver2.setSpeed(2, STOP)
+--
+exit 
+/ ledGreen.switchOff()
+/ ledYellow.switchOff()
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>928</x>
+      <y>624</y>
+      <w>264</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>
+FRONT ARM UP
+--
+entry
+/ ledGreen.switchOn()
+/ ledYellow.switchOn()
+--
+do 
+/ mgmDriver1.setSpeed(1, STOP)
+/ mgmDriver1.setSpeed(2, STOP)
+/ mgmDriver2.setSpeed(1, STOP)
+/ mgmDriver2.setSpeed(2, SLOW_LEFT)
+--
+exit 
+/ ledGreen.switchOff()
+/ ledYellow.switchOff()
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>928</x>
+      <y>816</y>
+      <w>264</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>
+FRONT ARM DOWN
+--
+entry
+/ ledGreen.switchOn()
+/ ledYellow.switchOn()
+--
+do 
+/ mgmDriver1.setSpeed(1, STOP)
+/ mgmDriver1.setSpeed(2, STOP)
+/ mgmDriver2.setSpeed(1, STOP)
+/ mgmDriver2.setSpeed(2, SLOW_RIGHT)
+--
+exit 
+/ ledGreen.switchOff()
+/ ledYellow.switchOff()
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>928</x>
+      <y>1008</y>
+      <w>264</w>
+      <h>208</h>
+    </coordinates>
+    <panel_attributes>
+CLOSE GRIPPER
+--
+entry
+/ ledGreen.switchOn()
+/ ledYellow.flashLED()
+--
+do 
+/ mgmDriver1.setSpeed(1, STOP)
+/ mgmDriver1.setSpeed(2, STOP)
+/ mgmDriver2.setSpeed(1, STOP)
+/ mgmDriver2.setSpeed(2, STOP)
+/ servoMotor.moveServo(CLOSE)
+--
+exit 
+/ ledGreen.switchOff()
+/ ledYellow.switchOff()
+/ gripper.savePos()
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>40</x>
+      <y>1008</y>
+      <w>264</w>
+      <h>208</h>
+    </coordinates>
+    <panel_attributes>
+OPEN GRIPPER 
+--
+entry
+/ ledGreen.switchOn()
+/ ledYellow.flashLED()
+--
+do 
+/ mgmDriver1.setSpeed(1, STOP)
+/ mgmDriver1.setSpeed(2, STOP)
+/ mgmDriver2.setSpeed(1, STOP)
+/ mgmDriver2.setSpeed(2, STOP)
+servoMotor.moveServo(OPEN)
+--
+exit 
+/ ledGreen.switchOff()
+/ ledYellow.switchOff()
+/ gripper.savePos()
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>0</x>
+      <y>448</y>
+      <w>544</w>
+      <h>672</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+joyStick1.isPressed()
+
+
+
+
+
+
+
+
+
+
+
+
+
+</panel_attributes>
+    <additional_attributes>50.0;820.0;10.0;820.0;10.0;30.0;660.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>696</x>
+      <y>448</y>
+      <w>648</w>
+      <h>672</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+joyStick2.isPressed()
+
+
+
+
+
+
+
+
+
+
+
+
+
+</panel_attributes>
+    <additional_attributes>620.0;820.0;660.0;820.0;660.0;30.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>192</x>
+      <y>272</y>
+      <w>232</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Note:
+
+Funktionsbezeichnung -&gt; implementiert
+Ugs. Bezeichnung -&gt; in progress
+bg=pink</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

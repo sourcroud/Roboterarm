@@ -2,8 +2,8 @@
 // Created by sourc on 30.10.2024.
 //
 
-#ifndef ROBOTERARM_PINBELEGUNG_H
-#define ROBOTERARM_PINBELEGUNG_H
+#ifndef ROBOTERARM_IOMASKS_H
+#define ROBOTERARM_IOMASKS_H
 
 // #define gripperButton1Pin 38
 // #define gripperButton2Pin 39
@@ -41,4 +41,4 @@
 #define servoMotorPin 5
 #define touchSensorPin 6
 
-#endif //ROBOTERARM_PINBELEGUNG_H
+#endif //ROBOTERARM_IOMASKS_H

@@ -3,7 +3,7 @@
 //
 
 #include "RoboticArm.h"
-#include "Pinbelegung.h"
+#include "iomasks.h"
 
 RoboticArm::RoboticArm()
         : // gripperButton1(gripperButton1Pin), gripperButton2(gripperButton2Pin),
