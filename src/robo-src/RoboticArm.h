@@ -13,8 +13,12 @@
 #include "TouchSensor.h"
 #include "GripperButton.h"
 #include "Servo.h"
+#include "ServoWrapper.h"
 
 class RoboticArm {
+private:
+    int lastServoPos;
+
     friend class GripperButton;
     friend class JoyStick;
     friend class LED;
@@ -24,8 +28,6 @@ class RoboticArm {
     friend class TouchSensor;
     friend class Servo;
 public:
-    // GripperButton gripperButton1; // OPEN
-    // GripperButton gripperButton2; // CLOSE
     JoyStick joyStick1;
     JoyStick joyStick2;
     LED ledGreen;
@@ -38,13 +40,15 @@ public:
     MicroSwitch microSwitch3;
     MicroSwitch microSwitch4;
     TouchSensor touchSensor;
+    ServoWrapper gripper;
     Servo servo;
-
 public:
     RoboticArm();
     //Copy-Konstruktor
     RoboticArm(const RoboticArm& other) = default;
     ~RoboticArm();
+    void updateSensors();
+    void updateActuators();
 };
 
 

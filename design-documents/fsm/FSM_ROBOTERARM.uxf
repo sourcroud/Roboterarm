@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>8</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>528</x>
-      <y>144</y>
-      <w>176</w>
-      <h>200</h>
+      <x>462</x>
+      <y>126</y>
+      <w>154</w>
+      <h>175</h>
     </coordinates>
     <panel_attributes>
 INITIALZUSTAND
@@ -37,10 +37,10 @@ exit
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>608</x>
-      <y>80</y>
-      <w>24</w>
-      <h>80</h>
+      <x>532</x>
+      <y>70</y>
+      <w>21</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 </panel_attributes>
@@ -49,10 +49,10 @@ exit
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>608</x>
+      <x>532</x>
       <y>0</y>
-      <w>16</w>
-      <h>16</h>
+      <w>14</w>
+      <h>14</h>
     </coordinates>
     <panel_attributes>type=initial</panel_attributes>
     <additional_attributes/>
@@ -60,10 +60,10 @@ exit
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>608</x>
-      <y>8</y>
-      <w>24</w>
-      <h>96</h>
+      <x>532</x>
+      <y>7</y>
+      <w>21</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;100.0;10.0;10.0</additional_attributes>
@@ -71,10 +71,10 @@ exit
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>528</x>
-      <y>376</y>
-      <w>176</w>
-      <h>168</h>
+      <x>462</x>
+      <y>329</y>
+      <w>154</w>
+      <h>147</h>
     </coordinates>
     <panel_attributes>
 BETRIEBSBEREIT
@@ -100,10 +100,10 @@ exit
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>696</x>
-      <y>256</y>
-      <w>128</w>
-      <h>216</h>
+      <x>609</x>
+      <y>224</y>
+      <w>112</w>
+      <h>189</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
  TouchSensor</panel_attributes>
@@ -112,10 +112,10 @@ exit
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>488</x>
-      <y>256</y>
-      <w>96</w>
-      <h>216</h>
+      <x>427</x>
+      <y>224</y>
+      <w>84</w>
+      <h>189</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
  TouchSensor</panel_attributes>
@@ -124,10 +124,10 @@ exit
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>40</x>
-      <y>624</y>
-      <w>264</w>
-      <h>176</h>
+      <x>35</x>
+      <y>546</y>
+      <w>231</w>
+      <h>154</h>
     </coordinates>
     <panel_attributes>
 LEFT TURN
@@ -155,10 +155,10 @@ exit
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>544</x>
-      <y>536</y>
-      <w>120</w>
-      <h>104</h>
+      <x>476</x>
+      <y>469</y>
+      <w>105</w>
+      <h>91</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 JoyStick1 DOWN
@@ -171,10 +171,10 @@ JoyStick1 DOWN
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>672</x>
-      <y>536</y>
-      <w>120</w>
-      <h>104</h>
+      <x>588</x>
+      <y>469</y>
+      <w>105</w>
+      <h>91</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
  JoyStick2 DOWN
@@ -184,10 +184,10 @@ JoyStick1 DOWN
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>40</x>
-      <y>816</y>
-      <w>264</w>
-      <h>176</h>
+      <x>35</x>
+      <y>714</y>
+      <w>231</w>
+      <h>154</h>
     </coordinates>
     <panel_attributes>
 RIGHT TURN
@@ -216,9 +216,9 @@ exit
     <id>Relation</id>
     <coordinates>
       <x>0</x>
-      <y>480</y>
-      <w>544</w>
-      <h>440</h>
+      <y>420</y>
+      <w>476</w>
+      <h>385</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
      JoyStick1 RIGHT 
@@ -228,10 +228,10 @@ exit
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>160</x>
-      <y>496</y>
-      <w>384</w>
-      <h>144</h>
+      <x>140</x>
+      <y>434</y>
+      <w>336</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 JoyStick1 LEFT -&gt; getXVal() &lt;= -10</panel_attributes>
@@ -240,10 +240,10 @@ JoyStick1 LEFT -&gt; getXVal() &lt;= -10</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>696</x>
-      <y>480</y>
-      <w>528</w>
-      <h>432</h>
+      <x>609</x>
+      <y>420</y>
+      <w>462</w>
+      <h>378</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 JoyStick2 LEFT
@@ -253,10 +253,10 @@ JoyStick2 LEFT
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>696</x>
-      <y>496</y>
-      <w>376</w>
-      <h>144</h>
+      <x>609</x>
+      <y>434</y>
+      <w>329</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 JoyStick2 RIGHT -&gt; getXVal() &gt;= 10</panel_attributes>
@@ -265,10 +265,10 @@ JoyStick2 RIGHT -&gt; getXVal() &gt;= 10</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>312</x>
-      <y>520</y>
-      <w>232</w>
-      <h>400</h>
+      <x>273</x>
+      <y>455</y>
+      <w>203</w>
+      <h>350</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
  JoyStick1 UP
@@ -283,10 +283,10 @@ JoyStick2 RIGHT -&gt; getXVal() &gt;= 10</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>696</x>
-      <y>520</y>
-      <w>304</w>
-      <h>392</h>
+      <x>609</x>
+      <y>455</y>
+      <w>266</w>
+      <h>343</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
  JoyStick2 UP
@@ -300,10 +300,10 @@ JoyStick2 RIGHT -&gt; getXVal() &gt;= 10</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>344</x>
-      <y>624</y>
-      <w>264</w>
-      <h>176</h>
+      <x>301</x>
+      <y>546</y>
+      <w>231</w>
+      <h>154</h>
     </coordinates>
     <panel_attributes>
 REAR ARM UP
@@ -331,10 +331,10 @@ exit
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>344</x>
-      <y>816</y>
-      <w>264</w>
-      <h>176</h>
+      <x>301</x>
+      <y>714</y>
+      <w>231</w>
+      <h>154</h>
     </coordinates>
     <panel_attributes>
 REAR ARM DOWN
@@ -362,10 +362,10 @@ exit
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>632</x>
-      <y>624</y>
-      <w>264</w>
-      <h>176</h>
+      <x>553</x>
+      <y>546</y>
+      <w>231</w>
+      <h>154</h>
     </coordinates>
     <panel_attributes>
 MIDDLE ARM UP
@@ -392,10 +392,10 @@ exit
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>632</x>
-      <y>816</y>
-      <w>264</w>
-      <h>176</h>
+      <x>553</x>
+      <y>714</y>
+      <w>231</w>
+      <h>154</h>
     </coordinates>
     <panel_attributes>
 MIDDLE ARM DOWN
@@ -420,10 +420,10 @@ exit
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>928</x>
-      <y>624</y>
-      <w>264</w>
-      <h>176</h>
+      <x>812</x>
+      <y>546</y>
+      <w>231</w>
+      <h>154</h>
     </coordinates>
     <panel_attributes>
 FRONT ARM UP
@@ -448,10 +448,10 @@ exit
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>928</x>
-      <y>816</y>
-      <w>264</w>
-      <h>176</h>
+      <x>812</x>
+      <y>714</y>
+      <w>231</w>
+      <h>154</h>
     </coordinates>
     <panel_attributes>
 FRONT ARM DOWN
@@ -479,10 +479,10 @@ exit
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>928</x>
-      <y>1008</y>
-      <w>264</w>
-      <h>208</h>
+      <x>812</x>
+      <y>882</y>
+      <w>231</w>
+      <h>182</h>
     </coordinates>
     <panel_attributes>
 CLOSE GRIPPER
@@ -496,7 +496,7 @@ do
 / mgmDriver1.setSpeed(2, STOP)
 / mgmDriver2.setSpeed(1, STOP)
 / mgmDriver2.setSpeed(2, STOP)
-/ servoMotor.moveServo(CLOSE)
+/ gripper.closeGripper()
 --
 exit 
 / ledGreen.switchOff()
@@ -512,10 +512,10 @@ exit
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>40</x>
-      <y>1008</y>
-      <w>264</w>
-      <h>208</h>
+      <x>35</x>
+      <y>882</y>
+      <w>231</w>
+      <h>182</h>
     </coordinates>
     <panel_attributes>
 OPEN GRIPPER 
@@ -529,12 +529,11 @@ do
 / mgmDriver1.setSpeed(2, STOP)
 / mgmDriver2.setSpeed(1, STOP)
 / mgmDriver2.setSpeed(2, STOP)
-servoMotor.moveServo(OPEN)
+/ gripper.openGripper()
 --
 exit 
 / ledGreen.switchOff()
 / ledYellow.switchOff()
-/ gripper.savePos()
 
 
 
@@ -546,12 +545,12 @@ exit
     <id>Relation</id>
     <coordinates>
       <x>0</x>
-      <y>448</y>
-      <w>544</w>
-      <h>672</h>
+      <y>392</y>
+      <w>476</w>
+      <h>588</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-joyStick1.isPressed()
+joyStick1.isSelectButtonPressed()
 
 
 
@@ -571,13 +570,13 @@ joyStick1.isPressed()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>696</x>
-      <y>448</y>
-      <w>648</w>
-      <h>672</h>
+      <x>609</x>
+      <y>392</y>
+      <w>623</w>
+      <h>588</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-joyStick2.isPressed()
+joyStick2.isSelectButtonPressed()
 
 
 
@@ -597,10 +596,10 @@ joyStick2.isPressed()
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>192</x>
-      <y>272</y>
-      <w>232</w>
-      <h>96</h>
+      <x>168</x>
+      <y>238</y>
+      <w>203</w>
+      <h>84</h>
     </coordinates>
     <panel_attributes>Note:
 

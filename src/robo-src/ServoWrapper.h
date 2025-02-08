@@ -11,20 +11,21 @@
 #define OPEN 0
 #define CLOSE 1
 
-#include "RoboticArm.h"
+
 #include "Servo.h"
 
 
 class ServoWrapper {
 private:
-    RoboticArm& gripper;
     int pos;
     unsigned long preMillis;
+
 public:
-    explicit ServoWrapper(RoboticArm& gripper);
+    explicit ServoWrapper();
     void openGripper();
     void closeGripper();
-    void savePos() const;
+    void setPos(int posVal);
+    int getPos() const;
 };
 
 

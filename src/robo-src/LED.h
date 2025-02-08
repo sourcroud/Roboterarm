@@ -7,12 +7,12 @@
 
 class LED {
 private:
-    int initialPin;
-    void setState(bool state) const;
     bool ledState;
     unsigned long preMillis;
+    void setState(bool state);
 public:
-    explicit LED(int initialPin);
+    explicit LED();
+    int getState() const;
     void switchOn();
     void switchOff();
     void flashLED();

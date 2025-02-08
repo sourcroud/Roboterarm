@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include "robo-src/RoboticArm.h"
 #include "robo-src/FSMRoboticArm.h"
-#include "robo-src/ServoWrapper.h"
 
 // initialize digital pins
 #include "robo-src/iomasks.h"
@@ -29,22 +28,39 @@ void setup() {
     pinMode(mgmDriver2ENAPin, OUTPUT);
     pinMode(mgmDriver2ENBPin, OUTPUT);
 
-    pinMode(microSwitch1Pin, INPUT);
-    pinMode(microSwitch2Pin, INPUT);
-    pinMode(microSwitch3Pin, INPUT);
-    pinMode(microSwitch4Pin, INPUT);
+    // Wann ist digitalRead(microSwitchPin) HIGH?
+    //
+    // Das hängt davon ab, wie du den Schalter angeschlossen hast:
+    // 1️⃣ Falls du COM mit GND und NO mit dem Arduino-Pin verbindest (übliche Variante)
+    //
+    //    Nicht betätigt: digitalRead(microSwitchPin) == LOW
+    //    Betätigt: digitalRead(microSwitchPin) == HIGH
+    //
+    // 2️⃣ Falls du COM mit 5V und NC mit dem Arduino-Pin verbindest
+    //
+    //    Nicht betätigt: digitalRead(microSwitchPin) == HIGH
+    //    Betätigt: digitalRead(microSwitchPin) == LOW
+    //
+    // Empfohlene Schaltung mit Pull-Up-Widerstand
+    //
+    // Da Mikroschalter oft prellen (kurze Störimpulse beim Schalten), sollte man den Eingang sauber halten.
+    // Die gängigste Methode ist die Verwendung des internen Pull-Up-Widerstands von Arduino:
+
+    pinMode(microSwitch1Pin, INPUT_PULLUP);
+    pinMode(microSwitch2Pin, INPUT_PULLUP);
+    pinMode(microSwitch3Pin, INPUT_PULLUP);
+    pinMode(microSwitch4Pin, INPUT_PULLUP);
 
     pinMode(servoMotorPin, OUTPUT);
-
 
 }
 
 RoboticArm robot;
-ServoWrapper gripper(robot);
-FSMRoboticArm fsm(robot, gripper);
+FSMRoboticArm fsm(robot);
 
 void loop() {
-
+    robot.updateSensors();
     fsm.evalTransition();
     fsm.evalState();
+    robot.updateActuators();
 }

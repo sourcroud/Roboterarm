@@ -15,15 +15,21 @@
 
 class mgmDriver {
 private:
-    int IN1Pin;
-    int IN2Pin;
-    int IN3Pin;
-    int IN4Pin;
-    int ENAPin;
-    int ENBPin;
+    int IN1Val;
+    int IN2Val;
+    int IN3Val;
+    int IN4Val;
+    int ENAVal;
+    int ENBVal;
 public:
-    explicit mgmDriver(int IN1Pin, int IN2Pin, int IN3Pin, int IN4Pin, int ENAPin, int ENBPin);
-    void setSpeed(int motorNo,int macro) const;
+    explicit mgmDriver();
+    void setSpeed(int motorNo,int macro);
+    int getIN1Val() const;
+    int getIN2Val() const;
+    int getIN3Val() const;
+    int getIN4Val() const;
+    int getENAVal() const;
+    int getENBVal() const;
 };
 
 

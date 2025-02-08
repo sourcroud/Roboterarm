@@ -8,12 +8,13 @@
 
 class MicroSwitch {
 private:
-    int initialPin;
-    bool getState();
+    int switchState;
+    bool getState() const;
 public:
-    explicit MicroSwitch(int initialPin);
-    bool isOpen();
-    bool isClosed();
+    explicit MicroSwitch();
+    bool isOpen() const;
+    bool isClosed() const;
+    void setState(int microSwitchState);
 };
 
 

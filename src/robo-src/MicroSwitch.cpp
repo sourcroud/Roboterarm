@@ -5,24 +5,24 @@
 #include "MicroSwitch.h"
 #include "Arduino.h"
 
-MicroSwitch::MicroSwitch(int initialPin)
-:initialPin(initialPin)
+MicroSwitch::MicroSwitch()
 {
-
+    switchState = false;
 }
 
-bool MicroSwitch::getState() {
-    int msVal = digitalRead(initialPin);
-    if(msVal == HIGH)return true;
-    else return false;
+bool MicroSwitch::getState() const {
+    return switchState;
+}
+// isOpen when LOW (NO = Normally Open)
+bool MicroSwitch::isOpen() const {
+    return !switchState;
 }
 
-bool MicroSwitch::isOpen() {
-    if(getState())return false;
-    else return true;
+bool MicroSwitch::isClosed() const {
+    return switchState;
 }
 
-bool MicroSwitch::isClosed() {
-    if(!getState())return true;
-    else return false;
+void MicroSwitch::setState(int microSwitchState) {
+    if (microSwitchState == HIGH)switchState = true;
+    else switchState = false;
 }

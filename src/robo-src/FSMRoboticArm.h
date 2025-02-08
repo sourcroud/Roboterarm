@@ -27,9 +27,8 @@ class FSMRoboticArm {
 private:
     RoboticArmState currentState;
     RoboticArm& roboticArm;
-    ServoWrapper& gripper;
 public:
-    explicit FSMRoboticArm(RoboticArm&, ServoWrapper&);
+    explicit FSMRoboticArm(RoboticArm&);
     void evalState();
     void evalTransition();
 };

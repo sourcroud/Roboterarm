@@ -5,66 +5,98 @@
 #include "mgmDriver.h"
 #include "Arduino.h"
 
-mgmDriver::mgmDriver(int IN1Pin, int IN2Pin, int IN3Pin, int IN4Pin, int ENAPin, int ENBPin)
-:IN1Pin(IN1Pin), IN2Pin(IN2Pin), IN3Pin(IN3Pin), IN4Pin(IN4Pin), ENAPin(ENAPin), ENBPin(ENBPin)
+mgmDriver::mgmDriver()
 {
-
+IN1Val = LOW;
+IN2Val = LOW;
+IN3Val = LOW;
+IN4Val = LOW;
+ENAVal = 0;
+ENBVal = 0;
 }
 
 
-void mgmDriver::setSpeed(int motorNo, int macro) const {
+void mgmDriver::setSpeed(int motorNo, int macro) {
     if (motorNo == 1) {
         switch (macro) {
             case STOP:
-                digitalWrite(IN1Pin, LOW);
-                digitalWrite(IN2Pin, LOW);
+                IN1Val = LOW;
+                IN2Val = LOW;
+                ENAVal = 0;
             case SLOW_LEFT:
-                analogWrite(ENAPin, 155);
-                digitalWrite(IN1Pin, LOW);
-                digitalWrite(IN2Pin, HIGH);
+                ENAVal = 155;
+                IN1Val = LOW;
+                IN2Val = HIGH;
             case SLOW_RIGHT:
-                analogWrite(ENAPin, 155);
-                digitalWrite(IN1Pin, HIGH);
-                digitalWrite(IN2Pin, LOW);
+                ENAVal = 155;
+                IN1Val = HIGH;
+                IN2Val = LOW;
             case FAST_LEFT:
-                analogWrite(ENAPin, 255);
-                digitalWrite(IN1Pin, LOW);
-                digitalWrite(IN2Pin, HIGH);
+                ENAVal = 255;
+                IN1Val = LOW;
+                IN2Val = HIGH;
             case FAST_RIGHT:
-                analogWrite(ENAPin, 255);
-                digitalWrite(IN1Pin, HIGH);
-                digitalWrite(IN2Pin, LOW);
+                ENAVal = 255;
+                IN1Val = HIGH;
+                IN2Val = LOW;
             default:
-                digitalWrite(IN1Pin, LOW);
-                digitalWrite(IN2Pin, LOW);
+                IN1Val = LOW;
+                IN2Val = LOW;
+                ENAVal = 0;
         }
     }
     else if (motorNo == 2) {
-        switch (macro) {
-            case STOP:
-                digitalWrite(IN3Pin, LOW);
-                digitalWrite(IN4Pin, LOW);
-            case SLOW_LEFT:
-                analogWrite(ENBPin, 155);
-                digitalWrite(IN3Pin, LOW);
-                digitalWrite(IN4Pin, HIGH);
-            case SLOW_RIGHT:
-                analogWrite(ENBPin, 155);
-                digitalWrite(IN3Pin, HIGH);
-                digitalWrite(IN4Pin, LOW);
-            case FAST_LEFT:
-                analogWrite(ENBPin, 255);
-                digitalWrite(IN3Pin, LOW);
-                digitalWrite(IN4Pin, HIGH);
-            case FAST_RIGHT:
-                analogWrite(ENBPin, 255);
-                digitalWrite(IN3Pin, HIGH);
-                digitalWrite(IN4Pin, LOW);
-            default:
-                digitalWrite(IN3Pin, LOW);
-                digitalWrite(IN4Pin, LOW);
-        }
+            switch (macro) {
+                case STOP:
+                    IN3Val = LOW;
+                    IN4Val = LOW;
+                    ENBVal = 0;
+                case SLOW_LEFT:
+                    ENBVal = 155;
+                    IN3Val = LOW;
+                    IN4Val = HIGH;
+                case SLOW_RIGHT:
+                    ENBVal = 155;
+                    IN3Val = HIGH;
+                    IN4Val = LOW;
+                case FAST_LEFT:
+                    ENBVal = 255;
+                    IN3Val = LOW;
+                    IN4Val = HIGH;
+                case FAST_RIGHT:
+                    ENBVal = 255;
+                    IN3Val = HIGH;
+                    IN4Val = LOW;
+                default:
+                    IN3Val = LOW;
+                    IN4Val = LOW;
+                    ENBVal = 0;
+            }
     }
+}
+
+int mgmDriver::getIN1Val() const {
+    return IN1Val;
+}
+
+int mgmDriver::getIN2Val() const {
+    return IN2Val;
+}
+
+int mgmDriver::getIN3Val() const {
+    return IN3Val;
+}
+
+int mgmDriver::getIN4Val() const {
+    return IN4Val;
+}
+
+int mgmDriver::getENAVal() const {
+    return ENAVal;
+}
+
+int mgmDriver::getENBVal() const {
+    return ENBVal;
 }
 
 

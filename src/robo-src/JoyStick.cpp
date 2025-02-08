@@ -5,26 +5,36 @@
 #include "JoyStick.h"
 #include "Arduino.h"
 
-JoyStick::JoyStick(int xPin, int yPin, int selPin)
-:xPin(xPin), yPin(yPin), selPin(selPin)
+JoyStick::JoyStick()
 {
-
+    xVal = 0;
+    yVal = 0;
+    selectButtonPressed = false;
 }
 
 int JoyStick::getXVal() {
-    int xVal = analogRead(xPin);
     return xVal;
 }
 
 int JoyStick::getYVal() {
-    int yVal = analogRead(yPin);
     return yVal;
 }
 
-bool JoyStick::isPressed() {
-    int selVal = digitalRead(selPin);
-    if(selVal == HIGH)return true;
-    else return false;
+bool JoyStick::isSelectButtonPressed() {
+    return selectButtonPressed;
+}
+
+void JoyStick::setXVal(int x) {
+    xVal = x;
+}
+
+void JoyStick::setYVal(int y) {
+    yVal = y;
+}
+
+void JoyStick::setSelectButton(int buttonState) {
+    if (buttonState == HIGH)selectButtonPressed = true;
+    else selectButtonPressed = false;
 }
 
 

@@ -8,15 +8,18 @@
 
 class JoyStick {
 private:
-    int xPin;
-    int yPin;
-    int selPin;
+    int xVal;
+    int yVal;
+    bool selectButtonPressed;
 
 public:
-    explicit JoyStick(int xPin, int yPin, int selPin);
+    explicit JoyStick();
     int getXVal();
     int getYVal();
-    bool isPressed();
+    bool isSelectButtonPressed();
+    void setXVal(int x);
+    void setYVal(int y);
+    void setSelectButton(int buttonState);
 };
 
 

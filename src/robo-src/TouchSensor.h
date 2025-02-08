@@ -8,11 +8,12 @@
 
 class TouchSensor {
 private:
-    int initialPin;
+    int sensorState;
     bool getState() const;
 public:
-    explicit TouchSensor(int initialPin);
+    explicit TouchSensor();
     bool isTouched();
+    void setState(int touchSensorState);
 };
 
 

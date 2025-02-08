@@ -6,17 +6,22 @@
 #include <Arduino.h>
 
 #define flashInterval 500 // ms
+#define ON 0
+#define OFF 1
 
-LED::LED(int initialPin) : initialPin(initialPin) {
+
+LED::LED() {
     preMillis = 0;
     ledState = false;
 }
 
-void LED::setState(bool state) const {
-    if(state) {
-        digitalWrite(initialPin, HIGH);
-    }
-    else digitalWrite(initialPin, LOW);
+int LED::getState() const {
+    if(ledState)return HIGH;
+    else return LOW;
+}
+
+void LED::setState(bool state) {
+    ledState = state;
 }
 
 void LED::switchOn() {
@@ -29,16 +34,11 @@ void LED::switchOff() {
 
 void LED::flashLED() {
     unsigned long currentMillis = millis();
-    if(currentMillis - preMillis >= flashInterval) { // Sind flashInterval ms vergangen?
+    if (currentMillis - preMillis >= flashInterval) { // Sind flashInterval ms vergangen?
         preMillis = currentMillis; // Zeitstempel aktualisieren
-        ledState = !ledState; // LED-Zustand umschalten, egal welcher Zustand vorliegt
-        // Compiler scheint ledState = !ledState; falsch zu interpretieren.
-        // Unreachable Code kann ignoriert werden!
-        if(ledState) {
-            digitalWrite(initialPin, HIGH);
-        }
-        else digitalWrite(initialPin, LOW);
+        setState(!ledState); // LED-Zustand umschalten, egal welcher Zustand vorliegt
     }
 }
+
 
 

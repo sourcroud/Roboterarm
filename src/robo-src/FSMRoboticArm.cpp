@@ -9,8 +9,8 @@
 
 #define DEBUG
 
-FSMRoboticArm::FSMRoboticArm(RoboticArm& roboticArm, ServoWrapper& gripper)
-:roboticArm(roboticArm), gripper(gripper)
+FSMRoboticArm::FSMRoboticArm(RoboticArm& roboticArm)
+:roboticArm(roboticArm)
 {
 currentState = RoboticArmState::INITIALZUSTAND;
 }
@@ -79,14 +79,14 @@ void FSMRoboticArm::evalState() {                                        // stat
             roboticArm.mgmDriver2.setSpeed(2, SLOW_RIGHT);
             break;
         case RoboticArmState::CLOSEGRIPPER:                                // 11
-            gripper.closeGripper();
+            roboticArm.gripper.closeGripper();
             roboticArm.mgmDriver1.setSpeed(1, STOP);
             roboticArm.mgmDriver1.setSpeed(2, STOP);
             roboticArm.mgmDriver2.setSpeed(1, STOP);
             roboticArm.mgmDriver2.setSpeed(2, STOP);
             break;
         case RoboticArmState::OPENGRIPPER:                                // 12
-            gripper.openGripper();
+            roboticArm.gripper.openGripper();
             roboticArm.mgmDriver1.setSpeed(1, STOP);
             roboticArm.mgmDriver1.setSpeed(2, STOP);
             roboticArm.mgmDriver2.setSpeed(1, STOP);
@@ -115,10 +115,10 @@ void FSMRoboticArm::evalTransition() {
         if(roboticArm.touchSensor.isTouched()) {
             nextState = RoboticArmState::INITIALZUSTAND;
         }
-        else if(roboticArm.joyStick1.isPressed()) {
+        else if(roboticArm.joyStick1.isSelectButtonPressed()) {
             nextState = RoboticArmState::OPENGRIPPER;
         }
-        else if(roboticArm.joyStick2.isPressed()) {
+        else if(roboticArm.joyStick2.isSelectButtonPressed()) {
             nextState = RoboticArmState::CLOSEGRIPPER;
         }
         else if(roboticArm.joyStick1.getXVal() >= 10) {    // right
@@ -187,12 +187,12 @@ void FSMRoboticArm::evalTransition() {
             } break;
 
         case RoboticArmState::CLOSEGRIPPER:                              // 11
-            if(!roboticArm.joyStick2.isPressed()) {
+            if(!roboticArm.joyStick2.isSelectButtonPressed()) {
                 nextState = RoboticArmState::BETRIEBSBEREIT;
             } break;
 
         case RoboticArmState::OPENGRIPPER:                               // 12
-        if(!roboticArm.joyStick1.isPressed()) {
+        if(!roboticArm.joyStick1.isSelectButtonPressed()) {
             nextState = RoboticArmState::BETRIEBSBEREIT;
         } break;
 
@@ -259,13 +259,11 @@ void FSMRoboticArm::evalTransition() {
             case RoboticArmState::CLOSEGRIPPER:                          // 11
                 roboticArm.ledGreen.switchOff();
                 roboticArm.ledYellow.switchOff();
-                gripper.savePos();
                 break;
 
             case RoboticArmState::OPENGRIPPER:                           // 12
                 roboticArm.ledGreen.switchOff();
                 roboticArm.ledYellow.switchOff();
-                gripper.savePos();
                 break;
 
             default:
