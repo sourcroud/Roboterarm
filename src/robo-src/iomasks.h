@@ -15,9 +15,9 @@
 #define joyStick2YPin A3
 #define joyStick2SelPin 49
 
-#define ledGreenPin 2
-#define ledYellowPin 3
-#define ledRedPin 4
+#define ledGreenPin 28
+#define ledYellowPin 26
+#define ledRedPin 27
 
 #define mgmDriver1IN1Pin 30
 #define mgmDriver1IN2Pin 31
