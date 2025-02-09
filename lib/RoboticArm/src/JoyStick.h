@@ -10,17 +10,24 @@ class JoyStick {
 private:
     int xVal;
     int yVal;
-    bool selectButtonPressed;
+    bool selectButtonState;
 
 public:
     explicit JoyStick();
-    int getXVal();
-    int getYVal();
-    bool isSelectButtonPressed();
+
+    int getXVal() const;
+    int getYVal() const;
+    bool getSelectState() const;
+
     void setXVal(int x);
     void setYVal(int y);
-    void setSelectButton(int buttonState);
+    void setSelectState(bool buttonState);
+
 };
 
 
 #endif //ROBOTERARM_JOYSTICK_H
+
+/*
+ *
+ */

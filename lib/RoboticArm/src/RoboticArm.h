@@ -14,10 +14,12 @@
 #include "GripperButton.h"
 #include "Servo.h"
 #include "ServoWrapper.h"
+#include "PS2X_lib.h"
 
 class RoboticArm {
 private:
     int lastServoPos;
+    int error;
 
     friend class GripperButton;
     friend class JoyStick;
@@ -27,6 +29,7 @@ private:
     friend class ServoWrapper;
     friend class TouchSensor;
     friend class Servo;
+    friend class PS2X;
 public:
     JoyStick joyStick1;
     JoyStick joyStick2;
@@ -42,12 +45,14 @@ public:
     TouchSensor touchSensor;
     ServoWrapper gripper;
     Servo servo;
+    PS2X ps2x;
 public:
     RoboticArm();
     //Copy-Konstruktor
     RoboticArm(const RoboticArm& other) = default;
     ~RoboticArm();
     void updateSensors();
+    void initPS2Controller(int clock, int command, int attention, int data, bool pressures, bool rumble);
     void updateActuators();
 };
 

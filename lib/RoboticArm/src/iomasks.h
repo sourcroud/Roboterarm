@@ -5,8 +5,7 @@
 #ifndef ROBOTERARM_IOMASKS_H
 #define ROBOTERARM_IOMASKS_H
 
-// #define gripperButton1Pin 38
-// #define gripperButton2Pin 39
+## Pin-Zuweisung
 
 #define joyStick1XPin A0
 #define joyStick1YPin A1
@@ -40,5 +39,19 @@
 
 #define servoMotorPin 5
 #define touchSensorPin 6
+
+##GamePad-Pins:
+// clock
+#define ps2clock 12
+// command
+#define ps2command 13
+// attention
+#define ps2attention 4
+// data
+#define ps2data 3
+
+##Voreinstellungen
+#define zeroPoint 128
+#define stickDrift 6
 
 #endif //ROBOTERARM_IOMASKS_H

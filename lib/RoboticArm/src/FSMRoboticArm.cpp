@@ -4,7 +4,7 @@
 
 #include "FSMRoboticArm.h"
 #include "RoboticArm.h"
-#include "ServoWrapper.h"
+#include "iomasks.h"
 
 
 #define DEBUG
@@ -107,92 +107,92 @@ void FSMRoboticArm::evalTransition() {
 
         case RoboticArmState::INITIALZUSTAND:                            // 1
         Serial.print("INITIALZUSTAND");
-        if(roboticArm.touchSensor.isTouched()) {
+        if(roboticArm.ps2x.ButtonPressed(PSB_START)) {
             nextState = RoboticArmState::BETRIEBSBEREIT;
         } break;
 
         case RoboticArmState::BETRIEBSBEREIT:                            // 2
-        if(roboticArm.touchSensor.isTouched()) {
+        if(roboticArm.ps2x.ButtonPressed(PSB_SELECT)) {
             nextState = RoboticArmState::INITIALZUSTAND;
         }
-        else if(roboticArm.joyStick1.isSelectButtonPressed()) {
+        else if(roboticArm.ps2x.ButtonPressed(PSB_L2)) {
             nextState = RoboticArmState::OPENGRIPPER;
         }
-        else if(roboticArm.joyStick2.isSelectButtonPressed()) {
+        else if(roboticArm.ps2x.ButtonPressed(PSB_R2)) {
             nextState = RoboticArmState::CLOSEGRIPPER;
         }
-        else if(roboticArm.joyStick1.getXVal() >= 10) {    // right
+        else if(roboticArm.ps2x.Analog(PSS_LX) >= (zeroPoint+stickDrift)) {    // right
             nextState = RoboticArmState::RIGHTTURN;
         }
-        else if(roboticArm.joyStick1.getXVal() <= -10) {   // left
+        else if(roboticArm.ps2x.Analog(PSS_LX) <= (zeroPoint-stickDrift)) {   // left
             nextState = RoboticArmState::LEFTTURN;
         }
-        else if(roboticArm.joyStick2.getXVal() >= 10) {    // right
+        else if(roboticArm.ps2x.Analog(PSS_RX) >= (zeroPoint+stickDrift)) {    // right
             nextState = RoboticArmState::FRONTARMUP;
         }
-        else if(roboticArm.joyStick2.getXVal() <= -10) {   // left
+        else if(roboticArm.ps2x.Analog(PSS_RX) <= (zeroPoint-stickDrift)) {   // left
             nextState = RoboticArmState::FRONTARMDOWN;
         }
-        else if(roboticArm.joyStick1.getYVal() >= 10) {    // down
+        else if(roboticArm.ps2x.Analog(PSS_LY) >= (zeroPoint+stickDrift)) {    // down
             nextState = RoboticArmState::REARARMDOWN;
         }
-        else if(roboticArm.joyStick1.getYVal() <= -10) {   // up
+        else if(roboticArm.ps2x.Analog(PSS_LY) <= (zeroPoint-stickDrift)) {   // up
             nextState = RoboticArmState::REARARMUP;
         }
-        else if(roboticArm.joyStick2.getYVal() >= 10) {    // down
+        else if(roboticArm.ps2x.Analog(PSS_RY) >= (zeroPoint+stickDrift)) {    // down
             nextState = RoboticArmState::MIDDLEARMDOWN;
         }
-        else if(roboticArm.joyStick2.getYVal() <= -10) {   // up
+        else if(roboticArm.ps2x.Analog(PSS_RY) <= (zeroPoint-stickDrift)) {   // up
             nextState = RoboticArmState::MIDDLEARMUP;
         } break;
 
         case RoboticArmState::LEFTTURN:                                  // 3
-            if(roboticArm.joyStick1.getXVal() > -10) {
+            if(roboticArm.ps2x.Analog(PSS_LX) > (zeroPoint-stickDrift)) {
                 nextState = RoboticArmState::BETRIEBSBEREIT;
             } break;
 
         case RoboticArmState::RIGHTTURN:                                 // 4
-            if(roboticArm.joyStick1.getXVal() < 10) {
+            if(roboticArm.ps2x.Analog(PSS_LX) < (zeroPoint+stickDrift)) {
                 nextState = RoboticArmState::BETRIEBSBEREIT;
             } break;
 
         case RoboticArmState::REARARMUP:                                 // 5
-            if(roboticArm.joyStick1.getYVal() > -10) {
+            if(roboticArm.ps2x.Analog(PSS_LY) > (zeroPoint-stickDrift)) {
                 nextState = RoboticArmState::BETRIEBSBEREIT;
             } break;
 
         case RoboticArmState::REARARMDOWN:                               // 6
-            if(roboticArm.joyStick1.getYVal() < 10) {
+            if(roboticArm.ps2x.Analog(PSS_LY) < (zeroPoint+stickDrift)) {
                 nextState = RoboticArmState::BETRIEBSBEREIT;
             } break;
 
         case RoboticArmState::MIDDLEARMUP:                               // 7
-            if(roboticArm.joyStick2.getYVal() > -10) {
+            if(roboticArm.ps2x.Analog(PSS_RY) > (zeroPoint-stickDrift)) {
                 nextState = RoboticArmState::BETRIEBSBEREIT;
             } break;
 
         case RoboticArmState::MIDDLEARMDOWN:                             // 8
-            if(roboticArm.joyStick2.getYVal() < 10) {
+            if(roboticArm.ps2x.Analog(PSS_RY) < (zeroPoint+stickDrift)) {
                 nextState = RoboticArmState::BETRIEBSBEREIT;
             } break;
 
         case RoboticArmState::FRONTARMUP:                                // 9
-            if(roboticArm.joyStick2.getXVal() < 10) {
+            if(roboticArm.ps2x.Analog(PSS_RX) < (zeroPoint+stickDrift)) {
                 nextState = RoboticArmState::BETRIEBSBEREIT;
             } break;
 
         case RoboticArmState::FRONTARMDOWN:                              // 10
-            if(roboticArm.joyStick2.getXVal() > -10) {
+            if(roboticArm.ps2x.Analog(PSS_RX) > (zeroPoint-stickDrift)) {
                 nextState = RoboticArmState::BETRIEBSBEREIT;
             } break;
 
         case RoboticArmState::CLOSEGRIPPER:                              // 11
-            if(!roboticArm.joyStick2.isSelectButtonPressed()) {
+            if(!roboticArm.ps2x.ButtonPressed(PSB_R2)) {
                 nextState = RoboticArmState::BETRIEBSBEREIT;
             } break;
 
         case RoboticArmState::OPENGRIPPER:                               // 12
-        if(!roboticArm.joyStick1.isSelectButtonPressed()) {
+        if(!roboticArm.ps2x.ButtonPressed(PSB_L2)) {
             nextState = RoboticArmState::BETRIEBSBEREIT;
         } break;
 

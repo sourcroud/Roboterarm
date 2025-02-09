@@ -1,12 +1,14 @@
 #include <Arduino.h>
-#include "robo-src/RoboticArm.h"
-#include "robo-src/FSMRoboticArm.h"
+#include "RoboticArm.h"
+#include "FSMRoboticArm.h"
+// initialize pins
+#include "iomasks.h"
 
-// initialize digital pins
-#include "robo-src/iomasks.h"
+RoboticArm robot;
+FSMRoboticArm fsm(robot);
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(57600);
     pinMode(joyStick1XPin, INPUT);
     pinMode(joyStick1YPin, INPUT);
     pinMode(joyStick1SelPin, INPUT);
@@ -50,13 +52,14 @@ void setup() {
     pinMode(microSwitch2Pin, INPUT_PULLUP);
     pinMode(microSwitch3Pin, INPUT_PULLUP);
     pinMode(microSwitch4Pin, INPUT_PULLUP);
+    //pinMode(servoMotorPin, OUTPUT);
 
-    pinMode(servoMotorPin, OUTPUT);
-
+    robot.servo.attach(servoMotorPin);
+    //GamePad(clock, command, attention, data, Pressures?, Rumble?)
+    robot.initPS2Controller(ps2clock, ps2command, ps2attention, ps2data, true, true);
 }
 
-RoboticArm robot;
-FSMRoboticArm fsm(robot);
+
 
 void loop() {
     robot.updateSensors();

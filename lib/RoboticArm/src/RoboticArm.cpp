@@ -20,10 +20,11 @@ RoboticArm::RoboticArm()
         microSwitch4(),
         touchSensor(),
         gripper(),
-        servo()
+        servo(),
+        ps2x()
 {
-    servo.attach(servoMotorPin);
     lastServoPos = -1;
+    error = 0;
 }
 
 RoboticArm::~RoboticArm() {
@@ -31,14 +32,7 @@ RoboticArm::~RoboticArm() {
 }
 
 void RoboticArm::updateSensors() {
-    joyStick1.setXVal(analogRead(joyStick1XPin));
-    joyStick1.setYVal(analogRead(joyStick1YPin));
-    joyStick1.setSelectButton(digitalRead(joyStick1SelPin));
-
-    joyStick2.setXVal(analogRead(joyStick2XPin));
-    joyStick2.setYVal(analogRead(joyStick2YPin));
-    joyStick2.setSelectButton(digitalRead(joyStick2SelPin));
-
+    ps2x.read_gamepad();
     microSwitch1.setState(digitalRead(microSwitch1Pin));
     microSwitch2.setState(digitalRead(microSwitch2Pin));
     microSwitch3.setState(digitalRead(microSwitch3Pin));
@@ -71,6 +65,40 @@ void RoboticArm::updateActuators() {
     if(newPos != this->lastServoPos) {
         servo.write(constrain(newPos, 0, 180));
         lastServoPos = newPos;
+    }
+}
+
+void RoboticArm::initPS2Controller(int clock, int command, int attention, int data, bool pressures, bool rumble) {
+    this->error = 0;
+    byte type = 0;
+    byte vibrate = 0;
+    this->error = ps2x.config_gamepad(clock, command, attention, data, pressures, rumble);   //GamePad(clock, command, attention, data, Pressures?, Rumble?)
+
+    if(this->error == 0){
+        Serial.println("Found Controller, configured successful");
+        Serial.println("Go to www.billporter.info for updates and to report bugs.");
+    }
+
+    else if(this->error == 1)
+        Serial.println("No controller found, check wiring, see readme.txt to enable debug. visit www.billporter.info for troubleshooting tips");
+
+    else if(this->error == 2)
+        Serial.println("Controller found but not accepting commands. see readme.txt to enable debug. Visit www.billporter.info for troubleshooting tips");
+
+    else if(this->error == 3)
+        Serial.println("Controller refusing to enter Pressures mode, may not support it. ");
+
+    type = ps2x.readType();
+    switch(type) {
+        case 0:
+            Serial.println("Unknown Controller type");
+            break;
+        case 1:
+            Serial.println("DualShock Controller Found");
+            break;
+        case 2:
+            Serial.println("GuitarHero Controller Found");
+            break;
     }
 }
 
