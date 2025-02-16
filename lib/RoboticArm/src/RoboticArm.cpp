@@ -7,8 +7,6 @@
 
 RoboticArm::RoboticArm()
 :
-        joyStick1(),
-        joyStick2(),
         ledGreen(),
         ledYellow(),
         ledRed(),
@@ -18,7 +16,6 @@ RoboticArm::RoboticArm()
         microSwitch2(),
         microSwitch3(),
         microSwitch4(),
-        touchSensor(),
         gripper(),
         servo(),
         ps2x()
@@ -38,8 +35,6 @@ void RoboticArm::updateSensors() {
     microSwitch3.setState(digitalRead(microSwitch3Pin));
     microSwitch4.setState(digitalRead(microSwitch4Pin));
 
-    touchSensor.setState(digitalRead(touchSensorPin));
-
     gripper.setPos(servo.read());
 }
 
@@ -48,6 +43,7 @@ void RoboticArm::updateActuators() {
     digitalWrite(ledYellowPin, ledYellow.getState());
     digitalWrite(ledRedPin, ledRed.getState());
     digitalWrite(mgmDriver1IN1Pin, mgmDriver1.getIN1Val());
+
     digitalWrite(mgmDriver1IN2Pin, mgmDriver1.getIN2Val());
     digitalWrite(mgmDriver1IN3Pin, mgmDriver1.getIN3Val());
     digitalWrite(mgmDriver1IN4Pin, mgmDriver1.getIN4Val());

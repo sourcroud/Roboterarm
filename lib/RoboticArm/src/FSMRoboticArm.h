@@ -5,7 +5,6 @@
 #ifndef ROBOTERARM_FSMROBOTICARM_H
 #define ROBOTERARM_FSMROBOTICARM_H
 #include "RoboticArm.h"
-#include "ServoWrapper.h"
 
 // Enumeration-Klasse enthält benötigte States
 enum class RoboticArmState {  // State

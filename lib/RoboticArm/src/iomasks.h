@@ -5,14 +5,14 @@
 #ifndef ROBOTERARM_IOMASKS_H
 #define ROBOTERARM_IOMASKS_H
 
-## Pin-Zuweisung
+// Pin-Zuweisung
 
-#define joyStick1XPin A0
-#define joyStick1YPin A1
-#define joyStick1SelPin 48
-#define joyStick2XPin A2
-#define joyStick2YPin A3
-#define joyStick2SelPin 49
+//#define joyStick1XPin A0
+//#define joyStick1YPin A1
+//#define joyStick1SelPin 48
+//#define joyStick2XPin A2
+//#define joyStick2YPin A3
+//#define joyStick2SelPin 49
 
 #define ledGreenPin 28
 #define ledYellowPin 26
@@ -38,19 +38,19 @@
 #define microSwitch4Pin 25
 
 #define servoMotorPin 5
-#define touchSensorPin 6
+//#define touchSensorPin 6
 
-##GamePad-Pins:
+//GamePad-Pins:
 // clock
 #define ps2clock 12
 // command
 #define ps2command 13
 // attention
-#define ps2attention 4
+#define ps2attention 3
 // data
-#define ps2data 3
+#define ps2data 4
 
-##Voreinstellungen
+//Voreinstellungen
 #define zeroPoint 128
 #define stickDrift 6
 

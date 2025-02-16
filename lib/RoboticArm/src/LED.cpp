@@ -5,7 +5,7 @@
 #include "LED.h"
 #include <Arduino.h>
 
-#define flashInterval 500 // ms
+#define flashInterval 750 // ms
 #define ON 0
 #define OFF 1
 

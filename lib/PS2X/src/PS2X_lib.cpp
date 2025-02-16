@@ -101,7 +101,7 @@ void PS2X::read_gamepad(boolean motor1, byte motor2) {
   
   delayMicroseconds(CTRL_BYTE_DELAY);
   //Send the command to send button and joystick data;
-  char dword[9] = {0x01,0x42,0,motor1,static_cast<char>(motor2),0,0,0,0};
+  char dword[9] = {0x01,0x42,0,motor1,motor2,0,0,0,0};
   byte dword2[12] = {0,0,0,0,0,0,0,0,0,0,0,0};
 
   for (int i = 0; i<9; i++) {

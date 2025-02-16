@@ -6,14 +6,11 @@
 #define ROBOTERARM_ROBOTICARM_H
 
 #include "Arduino.h"
-#include "JoyStick.h"
 #include "LED.h"
 #include "mgmDriver.h"
 #include "MicroSwitch.h"
-#include "TouchSensor.h"
-#include "GripperButton.h"
-#include "Servo.h"
 #include "ServoWrapper.h"
+#include "Servo.h"
 #include "PS2X_lib.h"
 
 class RoboticArm {
@@ -21,8 +18,7 @@ private:
     int lastServoPos;
     int error;
 
-    friend class GripperButton;
-    friend class JoyStick;
+    //friend class JoyStick;
     friend class LED;
     friend class mgmDriver;
     friend class MicroSwitch;
@@ -31,8 +27,8 @@ private:
     friend class Servo;
     friend class PS2X;
 public:
-    JoyStick joyStick1;
-    JoyStick joyStick2;
+    //JoyStick joyStick1;
+    //JoyStick joyStick2;
     LED ledGreen;
     LED ledYellow;
     LED ledRed;
@@ -42,7 +38,6 @@ public:
     MicroSwitch microSwitch2;
     MicroSwitch microSwitch3;
     MicroSwitch microSwitch4;
-    TouchSensor touchSensor;
     ServoWrapper gripper;
     Servo servo;
     PS2X ps2x;

@@ -8,13 +8,13 @@ RoboticArm robot;
 FSMRoboticArm fsm(robot);
 
 void setup() {
-    Serial.begin(57600);
-    pinMode(joyStick1XPin, INPUT);
-    pinMode(joyStick1YPin, INPUT);
-    pinMode(joyStick1SelPin, INPUT);
-    pinMode(joyStick2XPin, INPUT);
-    pinMode(joyStick2YPin, INPUT);
-    pinMode(joyStick2SelPin, INPUT);
+    Serial.begin(9600);
+    //pinMode(joyStick1XPin, INPUT);
+    //pinMode(joyStick1YPin, INPUT);
+    //pinMode(joyStick1SelPin, INPUT);
+    //pinMode(joyStick2XPin, INPUT);
+    //pinMode(joyStick2YPin, INPUT);
+    //pinMode(joyStick2SelPin, INPUT);
 
     pinMode(ledGreenPin, OUTPUT);
     pinMode(ledYellowPin, OUTPUT);
@@ -52,7 +52,7 @@ void setup() {
     pinMode(microSwitch2Pin, INPUT_PULLUP);
     pinMode(microSwitch3Pin, INPUT_PULLUP);
     pinMode(microSwitch4Pin, INPUT_PULLUP);
-    //pinMode(servoMotorPin, OUTPUT);
+    pinMode(servoMotorPin, OUTPUT);
 
     robot.servo.attach(servoMotorPin);
     //GamePad(clock, command, attention, data, Pressures?, Rumble?)
@@ -62,8 +62,10 @@ void setup() {
 
 
 void loop() {
-    robot.updateSensors();
-    fsm.evalTransition();
-    fsm.evalState();
-    robot.updateActuators();
+    while(true) {
+        robot.updateSensors();
+        fsm.evalTransition();
+        fsm.evalState();
+        robot.updateActuators();
+    }
 }
