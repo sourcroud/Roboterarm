@@ -59,10 +59,13 @@ void setup() {
     robot.initPS2Controller(ps2clock, ps2command, ps2attention, ps2data, true, true);
 }
 
-
+unsigned long lastUpdateTime = 0;
+const int updateInterval = 100; // 50ms = 20Hz Update-Rate
 
 void loop() {
-    while(true) {
+    if(millis() - lastUpdateTime >= updateInterval) {
+        lastUpdateTime = millis();
+
         robot.updateSensors();
         fsm.evalTransition();
         fsm.evalState();

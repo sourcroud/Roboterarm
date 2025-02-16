@@ -4,12 +4,12 @@
 
 #include "ServoWrapper.h"
 #include "Arduino.h"
-#define servoDelay 500 // ms
+#define servoDelay 10 // ms
 
 
 
 ServoWrapper::ServoWrapper()
-:pos(0), preMillis(0)
+:pos(90), preMillis(0)
 {
 
 }

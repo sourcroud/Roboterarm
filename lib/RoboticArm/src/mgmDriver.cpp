@@ -15,62 +15,88 @@ ENAVal = 0;
 ENBVal = 0;
 }
 
+#define EN_SLOW 100
+#define EN_FAST 150
 
 void mgmDriver::setSpeed(int motorNo, int macro) {
     if (motorNo == 1) {
         switch (macro) {
             case STOP:
+                Serial.print("Motor 1: STOP.\n");
                 IN1Val = LOW;
                 IN2Val = LOW;
                 ENAVal = 0;
+                break;
             case SLOW_LEFT:
-                ENAVal = 155;
+                Serial.print("Motor 1: SLOW_LEFT.\n");
+                ENAVal = EN_SLOW;
                 IN1Val = LOW;
                 IN2Val = HIGH;
+                break;
             case SLOW_RIGHT:
-                ENAVal = 155;
+                Serial.print("Motor 1: SLOW_RIGHT.\n");
+                ENAVal = EN_SLOW;
                 IN1Val = HIGH;
                 IN2Val = LOW;
+                break;
             case FAST_LEFT:
-                ENAVal = 255;
+                Serial.print("Motor 1: FAST_LEFT.\n");
+                ENAVal = EN_FAST;
                 IN1Val = LOW;
                 IN2Val = HIGH;
+                break;
             case FAST_RIGHT:
-                ENAVal = 255;
+                Serial.print("Motor 1: FAST_RIGHT.\n");
+                ENAVal = EN_FAST;
                 IN1Val = HIGH;
                 IN2Val = LOW;
+                break;
             default:
+                Serial.print("Motor 1: default case.\n");
                 IN1Val = LOW;
                 IN2Val = LOW;
                 ENAVal = 0;
+                break;
         }
     }
     else if (motorNo == 2) {
             switch (macro) {
                 case STOP:
+                    Serial.print("Motor 2: STOP.\n");
                     IN3Val = LOW;
                     IN4Val = LOW;
                     ENBVal = 0;
+                    break;
                 case SLOW_LEFT:
-                    ENBVal = 155;
+                    Serial.print("Motor 2: SLOW_LEFT.\n");
+                    ENBVal = EN_SLOW;
                     IN3Val = LOW;
                     IN4Val = HIGH;
+                    break;
                 case SLOW_RIGHT:
-                    ENBVal = 155;
+                    Serial.print("Motor 2: SLOW_RIGHT.\n");
+                    ENBVal = EN_SLOW;
                     IN3Val = HIGH;
                     IN4Val = LOW;
+                    break;
                 case FAST_LEFT:
-                    ENBVal = 255;
+                    Serial.print("Motor 2: FAST_LEFT.\n");
+                    ENBVal = EN_FAST;
                     IN3Val = LOW;
                     IN4Val = HIGH;
+                    break;
                 case FAST_RIGHT:
-                    ENBVal = 255;
+                    Serial.print("Motor 2: FAST_RIGHT.\n");
+                    ENBVal = EN_FAST;
                     IN3Val = HIGH;
                     IN4Val = LOW;
+                    break;
                 default:
+                    Serial.print("Motor 2: default case.\n");
                     IN3Val = LOW;
                     IN4Val = LOW;
                     ENBVal = 0;
+                    break;
             }
     }
 }

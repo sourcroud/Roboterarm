@@ -20,7 +20,7 @@ RoboticArm::RoboticArm()
         servo(),
         ps2x()
 {
-    lastServoPos = -1;
+    lastServoPos = 0;
     error = 0;
 }
 
@@ -58,7 +58,7 @@ void RoboticArm::updateActuators() {
     analogWrite(mgmDriver2ENBPin, mgmDriver2.getENBVal());
 
     int newPos = gripper.getPos();
-    if(newPos != this->lastServoPos) {
+    if(abs(newPos - lastServoPos) > 2) { // 2° Deadband, damit kleine Änderungen ignoriert werden
         servo.write(constrain(newPos, 0, 180));
         lastServoPos = newPos;
     }
