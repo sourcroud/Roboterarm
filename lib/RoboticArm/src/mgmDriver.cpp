@@ -15,8 +15,10 @@ ENAVal = 0;
 ENBVal = 0;
 }
 
-#define EN_SLOW 100
+// 170 = 6V
+#define EN_SLOW 60
 #define EN_FAST 150
+#define EN_MAX 255
 
 void mgmDriver::setSpeed(int motorNo, int macro) {
     if (motorNo == 1) {
@@ -25,7 +27,7 @@ void mgmDriver::setSpeed(int motorNo, int macro) {
                 Serial.print("Motor 1: STOP.\n");
                 IN1Val = LOW;
                 IN2Val = LOW;
-                ENAVal = 0;
+                ENAVal = EN_MAX;
                 break;
             case SLOW_LEFT:
                 Serial.print("Motor 1: SLOW_LEFT.\n");
@@ -55,7 +57,7 @@ void mgmDriver::setSpeed(int motorNo, int macro) {
                 Serial.print("Motor 1: default case.\n");
                 IN1Val = LOW;
                 IN2Val = LOW;
-                ENAVal = 0;
+                ENAVal = EN_MAX;
                 break;
         }
     }
@@ -65,7 +67,7 @@ void mgmDriver::setSpeed(int motorNo, int macro) {
                     Serial.print("Motor 2: STOP.\n");
                     IN3Val = LOW;
                     IN4Val = LOW;
-                    ENBVal = 0;
+                    ENBVal = EN_MAX;
                     break;
                 case SLOW_LEFT:
                     Serial.print("Motor 2: SLOW_LEFT.\n");
@@ -95,7 +97,7 @@ void mgmDriver::setSpeed(int motorNo, int macro) {
                     Serial.print("Motor 2: default case.\n");
                     IN3Val = LOW;
                     IN4Val = LOW;
-                    ENBVal = 0;
+                    ENBVal = EN_MAX;
                     break;
             }
     }
